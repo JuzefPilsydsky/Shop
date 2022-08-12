@@ -1,0 +1,14 @@
+version: '3'
+services:
+  mariadb:
+    image: "mariadb"
+    restart: "no"
+    ports:
+      - "3306:3306"
+    volumes:
+      - /var/docker/mariadb/conf:/etc/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
