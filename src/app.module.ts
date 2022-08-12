@@ -24,6 +24,7 @@ import { CategoryModule } from './category/category.module';
         database: configService.getOrThrow('MYSQL_DATABASE'),
         entities: [],
         synchronize: true,
+        autoLoadEntities: true,
       }),
     }),
 
