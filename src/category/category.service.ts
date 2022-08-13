@@ -27,7 +27,7 @@ export class CategoryService {
         await this.categoryReposytory.delete(id)
     }
 
-    async updateOneById(id: number, categoryDto: CategoryDto) {
+    async update(id: number, categoryDto: CategoryDto) {
         await this.categoryReposytory.update(id, categoryDto)
     }
 }
