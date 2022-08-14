@@ -8,26 +8,26 @@ import { CategoryORM } from './categoryORM';
 export class CategoryService {
     constructor(
         @InjectRepository(CategoryORM)
-        private categoryReposytory: Repository<CategoryORM>
+        private categoryRepository: Repository<CategoryORM>
     ) {}
 
     getAll(): Promise<CategoryORM[]> {
-        return this.categoryReposytory.find()
+        return this.categoryRepository.find()
     }
 
     getOne(id: number): Promise<CategoryORM | null> {
-        return this.categoryReposytory.findOneBy({id})
+        return this.categoryRepository.findOneBy({id})
     }
 
     create(categoryDto: CategoryDto) {
-        return this.categoryReposytory.save(categoryDto)
+        return this.categoryRepository.save(categoryDto)
     }
 
     async delete(id: number): Promise<void> {
-        await this.categoryReposytory.delete(id)
+        await this.categoryRepository.delete(id)
     }
 
     async update(id: number, categoryDto: CategoryDto) {
-        await this.categoryReposytory.update(id, categoryDto)
+        await this.categoryRepository.update(id, categoryDto)
     }
 }
