@@ -6,7 +6,8 @@ import { ProductDto } from './productDto';
 import { ProductORM } from './productORM';
 
 @Injectable()
-export class ProductService {constructor(
+export class ProductService {
+    constructor(
     @InjectRepository(ProductORM)
     private productReposytory: Repository<ProductORM>,
     
@@ -14,31 +15,33 @@ export class ProductService {constructor(
     private categoryService: CategoryService
 ) {}
 
-getAll(): Promise<ProductORM[]> {
-    return this.productReposytory.find();
+    getAll(): Promise<ProductORM[]> {
+        return this.productReposytory.find();
 }
 
-getOne( id: number ): Promise<ProductORM> {
-    return this.productReposytory.findOneBy({id})
+    getOne( id: number ): Promise<ProductORM> {
+        return this.productReposytory.findOneBy({id})
 }
 
-async create(productDto: ProductDto) {
-    const category = await this.categoryService.getOne(productDto.categoryId.id)
+    async create(productDto: ProductDto) {
+        const category = await this.categoryService.getOne(productDto.categoryId)
 
-    if (category == null) {
-        throw new Error()
+        if (category == null) {
+            throw new Error(`${category} can't be a null`)
     }
 
-    return this.productReposytory.save({
-        ...productDto,
-        categoryId: category
-    })
-}
+        return this.productReposytory.save({
+            ...productDto,
+            categoryId: category
+        })
+    }
 
-async delete( id: number ): Promise<void> {
-    await this.productReposytory.delete(id)
-}
+    async delete( id: number ): Promise<void> {
+        await this.productReposytory.delete(id)
+    }
 
-async update(id: number, productDto: ProductDto) {
-    await this.productReposytory.update(id, productDto)
-}}
+    async update(id: number, productDto: ProductDto) {
+        const category = await this.categoryService.getOne(productDto.categoryId)
+        return this.productReposytory.update(id, {...productDto, categoryId: category})
+    }
+}
