@@ -17,17 +17,17 @@ export class ProductController {
     }
 
     @Post('create')
-    createProduct(@Body() productDto: ProductDto) {
+    create(@Body() productDto: ProductDto) {
         return this.productServise.create(productDto)
     }
     
     @Delete(':id')
-    deleteOneById(@Param() param) {
+    delete(@Param() param) {
         return this.productServise.delete(param.id)
     }
 
     @Put(':id')
-    async updateOneById(@Body() productDto: ProductDto, @Param() param) {
+    async update(@Body() productDto: ProductDto, @Param() param) {
         const response = await this.productServise.update(param.id, productDto);
         return response;
     }
