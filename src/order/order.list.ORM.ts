@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { ListOfProductsORM } from "./list.of.products.ORM";
 import { OrderList } from "./order.list.interface";
 import { OrderStatus } from "./order.status.enum";
 
@@ -6,6 +7,7 @@ import { OrderStatus } from "./order.status.enum";
 @Unique(["clientEmail", "clientPhone"])
 export class OrderListORM implements OrderList{
     @PrimaryGeneratedColumn()
+    @OneToMany((type) => ListOfProductsORM, orderList => orderList.orderListId)
     id: number;
     @Column()
     clientPhone: number;
