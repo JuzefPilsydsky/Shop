@@ -18,5 +18,5 @@ export class ProductDto {
     readonly imgUrl: string;
  
     @IsNumber()
-    readonly categoryId: Category;
+    readonly categoryId: number;
  }
