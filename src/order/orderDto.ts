@@ -2,7 +2,7 @@ import { IsEmail, IsNotEmpty, IsPhoneNumber } from "class-validator";
 import { ListOfProducts } from "./list.of.products.interface";
 import { OrderStatus } from "./order.status.enum";
 
-export class OrderListDto {
+export class OrderDto {
     @IsNotEmpty({message:'Must be a phone number'})
     @IsPhoneNumber()
     readonly clientPhone: number;
