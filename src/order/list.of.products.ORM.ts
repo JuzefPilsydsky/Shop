@@ -1,7 +1,6 @@
 import { ProductORM } from "src/product/productORM";
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { ListOfProducts } from "./list.of.products.interface";
-import { OrderListORM } from "./order.list.ORM";
 
 @Entity({name:"List of Products"})
 export class ListOfProductsORM implements ListOfProducts {
@@ -10,13 +9,10 @@ export class ListOfProductsORM implements ListOfProducts {
     @Column()
     count: number;
     @Column()
-    prise: number;
+    price: number;
     @Column()
-    currensy: string;
+    currency: string;
     @OneToOne((type) => ProductORM)
     @JoinColumn()
-    productId: ProductORM;
-    @ManyToOne((type) => OrderListORM, orderList => orderList.id, {nullable: false})
-    @JoinColumn({name:'orderLIstId'})
-    orderListId: OrderListORM;
+    productId: ProductORM;  
 }
