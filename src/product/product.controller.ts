@@ -4,31 +4,31 @@ import { ProductDto } from './productDto';
 
 @Controller('product')
 export class ProductController {
-    constructor(private productServise: ProductService) {}
+    constructor(private productServiсe: ProductService) {}
 
     @Get()
     getAll() {
-        return this.productServise.getAll();
+        return this.productServiсe.getAll();
     }
 
     @Get(':id')
     getOne(@Param() param) {
-        return this.productServise.getOne(param.id);
+        return this.productServiсe.getOne(param.id);
     }
 
     @Post('create')
     create(@Body() productDto: ProductDto) {
-        return this.productServise.create(productDto)
+        return this.productServiсe.create(productDto)
     }
     
     @Delete(':id')
     delete(@Param() param) {
-        return this.productServise.delete(param.id)
+        return this.productServiсe.delete(param.id)
     }
 
     @Put(':id')
     async update(@Body() productDto: ProductDto, @Param() param) {
-        const response = await this.productServise.update(param.id, productDto);
+        const response = await this.productServiсe.update(param.id, productDto);
         return response;
     }
 }
