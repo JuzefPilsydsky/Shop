@@ -1,5 +1,4 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator";
-import { Category } from "src/category/category.interface";
 
 export class ProductDto {
     @IsNotEmpty({message:'Must be a name of product'})
