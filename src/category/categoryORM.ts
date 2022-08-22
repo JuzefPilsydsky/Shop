@@ -4,7 +4,7 @@ import { Category } from "./category.interface";
 
 @Entity({name: "Category"})
 export class CategoryORM implements Category {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('increment')
     @OneToMany((type) => ProductORM, category => category.categoryId )
     id: number;
     @Column()

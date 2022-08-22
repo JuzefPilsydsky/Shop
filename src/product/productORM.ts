@@ -4,7 +4,7 @@ import { Products } from "./product.interface";
 
 @Entity({name: "Products"})
 export class ProductORM implements Products {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('increment')
     id: number;
     @Column()
     name: string;

@@ -4,7 +4,7 @@ import { Admin } from "./admin.interface";
 @Entity({name: "Admin"})
 @Unique(["email"])
 export class AdminORM implements Admin {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('increment')
   id: number;
   @Column()
   email: string;
