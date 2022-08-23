@@ -1,15 +1,15 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
-import { ListOfProductsORM } from "./list.of.products.ORM";
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { OrderProductsORM } from "./order.products.ORM";
 import { Order } from "./order.interface";
 import { OrderStatus } from "./order.status.enum";
 
-@Entity({name: "Order List"})
-@Unique(["clientEmail", "clientPhone"])
+@Entity({name: "OrderList"})
 export class OrderORM implements Order{
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('increment')
+    @OneToMany((type) => OrderProductsORM, item => item.orderId)
     id: number;
     @Column()
-    clientPhone: number;
+    clientPhone: string;
     @Column()
     clientEmail: string;
     @Column()
@@ -20,6 +20,7 @@ export class OrderORM implements Order{
         default: OrderStatus.processed,
     })
     status: OrderStatus;
-    @Column()
-    listOfProducts: ListOfProductsORM;
+    @OneToMany((type) => OrderProductsORM, value => value.id)
+    @JoinColumn({name:'products'})
+    products: OrderProductsORM;
 }   
