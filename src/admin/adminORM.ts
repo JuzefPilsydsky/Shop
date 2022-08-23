@@ -1,5 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { Admin } from "./admin.interface";
+import { Role } from "./role.enum";
 
 @Entity({name: "Admin"})
 @Unique(["email"])
@@ -12,4 +13,10 @@ export class AdminORM implements Admin {
   password: string;
   @Column()
   name: string;
+  @Column({
+    type: "enum",
+    enum: Role,
+    default: Role.ADMIN,
+  })
+  role: Role;
 }
