@@ -1,18 +1,31 @@
-import { IsEmail, IsNotEmpty, IsPhoneNumber } from "class-validator";
-import { ListOfProducts } from "./list.of.products.interface";
-import { OrderStatus } from "./order.status.enum";
+import { IsEmail, IsNotEmpty, IsNumber, IsPhoneNumber, IsString } from "class-validator";
+
+
+export class OrderProductsDto {
+    @IsNotEmpty({message:'Must be a count'})
+    @IsNumber()
+    readonly count: number;
+    @IsNotEmpty({message:'Must be a price'})
+    @IsNumber()
+    readonly price: number;
+    @IsNotEmpty({message:'Must be a currency'})
+    @IsString()
+    readonly currency: string;
+    @IsNotEmpty({message:'Must be a product'})
+    @IsNumber()
+    readonly productId: number;
+}
 
 export class OrderDto {
     @IsNotEmpty({message:'Must be a phone number'})
     @IsPhoneNumber()
-    readonly clientPhone: number;
+    readonly clientPhone: string;
     @IsNotEmpty({message:'Must be email'})
     @IsEmail()
     readonly clientEmail: string;
     @IsNotEmpty({message:'Must be a name'})
+    @IsString()
     readonly clientName: string;
-    @IsNotEmpty({message:'Must be a status'})
-    readonly status: OrderStatus;
     @IsNotEmpty({message:'Must be a list of products'})
-    listOfProducts: ListOfProducts[];  
+    readonly products: OrderProductsDto[];
 }
