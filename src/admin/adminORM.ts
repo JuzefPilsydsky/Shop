@@ -3,12 +3,12 @@ import { Admin } from "./admin.interface";
 import { Role } from "./role.enum";
 
 @Entity({name: "Admin"})
-@Unique(["email"])
+@Unique(["login"])
 export class AdminORM implements Admin {
   @PrimaryGeneratedColumn('increment')
   id: number;
   @Column()
-  email: string;
+  login: string;
   @Column()
   password: string;
   @Column()
