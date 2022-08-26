@@ -74,4 +74,7 @@ export class OrderService {
         return order.id;
     }
 
+    async delete(id: number): Promise<void> {
+         await this.orderRepository.delete(id)
+    }
 }

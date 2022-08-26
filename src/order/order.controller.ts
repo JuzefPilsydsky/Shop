@@ -1,4 +1,6 @@
-import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post } from '@nestjs/common';
+import { Role } from 'src/admin/role.enum';
+import { Roles } from 'src/admin/roles.decorator';
 import { OrderService } from './order.service';
 import { OrderDto } from './orderDto';
 
@@ -15,5 +17,11 @@ export class OrderController {
     @Get(':id')
     getOne(@Param() param) {
         return this.orderService.getOne(param.id)
+    }
+
+    @Delete(':id')
+    @Roles(Role.ADMIN, Role.MAIN_ADMIN)
+    delete(@Param() param) {
+        return this.orderService.delete(param.id)
     }
 }
