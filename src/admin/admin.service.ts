@@ -31,4 +31,9 @@ export class AdminService {
         await this.adminRepository.update(id, adminDto);
     }
 
+    async getOneByLogin(login: string): Promise<AdminORM> {
+        const admin = await this.adminRepository.findOne({where:{login}});
+        return admin;
+    }
+
 }
