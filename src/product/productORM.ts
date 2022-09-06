@@ -1,11 +1,13 @@
 import { CategoryORM } from "src/category/categoryORM";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { OrderProductsORM } from "src/order/order.products.ORM";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { Products } from "./product.interface";
 
 @Entity({name: "Products"})
 @Unique(['name'])
 export class ProductORM implements Products {
     @PrimaryGeneratedColumn('increment')
+    @OneToMany((type) => OrderProductsORM, value => value.productId )
     id: number;
     @Column()
     name: string;

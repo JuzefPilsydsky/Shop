@@ -14,11 +14,10 @@ export class OrderProductsORM implements OrderProducts {
     price: number;
     @Column()
     currency: string;
-    @OneToOne((type) => ProductORM)
+    @ManyToOne((type) => ProductORM, value => value.id)
     @JoinColumn({name:'productId'})
     productId: ProductORM;
     @ManyToOne((type) => OrderORM, order => order.id)
     @JoinColumn({name:'orderId'})
     orderId: OrderORM;
-
 }
