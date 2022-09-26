@@ -6,5 +6,5 @@ export interface Order {
     clientEmail: string;
     clientName: string;
     status: number;
-    products: OrderProducts;
+    products: OrderProducts[];
 }
