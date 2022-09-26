@@ -18,8 +18,9 @@ export class OrderService {
     ) {}
 
     
-    getOne(id: number): Promise<OrderORM | null> {
-        return this.orderRepository.findOneBy({id})
+    async getOne(id: number): Promise<OrderORM | null> {
+        const order = await this.orderRepository.findOne({where:{id}, relations:{products: true}});
+        return order;
     }
     
     async create(orderDto: OrderDto) {
@@ -41,10 +42,8 @@ export class OrderService {
             clientName: orderDto.clientName,
         });
         order = await this.orderRepository.save(order)
-        console.log(order);
-        console.log(orderDto.products.length);
+
         for(let i = 0; i < orderDto.products.length; i++) {
-            console.log('get product');
             const product = await this.productService.getOne(orderDto.products[i].productId);
             if(product == null || undefined) {
                 throw new Error('The product does not exist')
@@ -54,23 +53,15 @@ export class OrderService {
             if(clientPrice !== product.price * orderDto.products[i].count) {
                 throw new Error('Price is not valid')
             }
-            
-            console.log('create order product');
 
-            let list = this.orderProductsRepository.create({
+            let list = await this.orderProductsRepository.save({
                 count: orderDto.products[i].count,
                 price: orderDto.products[i].price,
                 currency: orderDto.products[i].currency,
                 productId: product,
                 orderId: order,
             })
-
-            console.log(list);
-
-            list = await this.orderProductsRepository.save(list)
-
         }
-        
         return order.id;
     }
 
