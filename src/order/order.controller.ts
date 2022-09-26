@@ -1,6 +1,5 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post } from '@nestjs/common';
-import { Role } from 'src/admin/role.enum';
-import { Roles } from 'src/admin/roles.decorator';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, UseGuards } from '@nestjs/common';
+import { JwtStrategy } from 'src/auth/jwt.strategy';
 import { OrderService } from './order.service';
 import { OrderDto } from './orderDto';
 
@@ -19,8 +18,9 @@ export class OrderController {
         return this.orderService.getOne(param.id)
     }
 
+    
+    @UseGuards(JwtStrategy)
     @Delete(':id')
-    @Roles(Role.ADMIN, Role.MAIN_ADMIN)
     delete(@Param() param) {
         return this.orderService.delete(param.id)
     }
