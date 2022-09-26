@@ -1,10 +1,9 @@
-import { IsEmail, IsNotEmpty, IsString, Length } from "class-validator";
+import { IsNotEmpty, IsString, Length } from "class-validator";
 
 export class AdminDto {
     @IsNotEmpty({message:'Must be email'})
-    @IsEmail({message:'Email is not valid'})
     @IsString({message:'Must be a string'})
-    readonly email: string;
+    readonly login: string;
 
     @IsNotEmpty({message:'Must be a password'})
     @IsString({message:"Password must be a string"})
