@@ -22,5 +22,5 @@ export class OrderORM implements Order{
     status: OrderStatus;
     @OneToMany((type) => OrderProductsORM, value => value.id)
     @JoinColumn({name:'products'})
-    products: OrderProductsORM;
+    products: OrderProductsORM[];
 }   
