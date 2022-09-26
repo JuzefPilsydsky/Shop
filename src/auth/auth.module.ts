@@ -5,12 +5,11 @@ import { AdminModule } from 'src/admin/admin.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
-import { RolesGuard } from './roles.guard';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy, RolesGuard],
-  exports: [AuthService, JwtStrategy, JwtModule, RolesGuard],
+  providers: [AuthService, JwtStrategy],
+  exports: [AuthService, JwtStrategy, JwtModule],
   imports: [
    forwardRef(() => AdminModule), 
     
